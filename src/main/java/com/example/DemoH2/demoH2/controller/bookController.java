@@ -27,8 +27,7 @@ public class bookController {
 
     @PostMapping("/book")
     private int insertBook(@RequestBody book b) {
-        BS.insertBook(b);
-        return b.getId();
+        return BS.insertBook(b);
     }
 
     @DeleteMapping("/book/{id}")

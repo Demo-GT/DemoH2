@@ -7,15 +7,18 @@ import javax.persistence.*;
 public class book {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
     @Column(name = "name")
     private String name;
     @Column(name = "genre")
     private String genre;
 
-    public book() {
+    public book() { }
 
+    public book(String name, String genre) {
+        this.name = name;
+        this.genre = genre;
     }
 
     public book(int id, String name, String genre) {

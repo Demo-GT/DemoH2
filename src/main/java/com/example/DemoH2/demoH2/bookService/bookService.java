@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
-import java.awt.print.Book;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -44,20 +43,21 @@ public class bookService {
         return b;*/
     }
 
-    public void insertBook(book b) {
-
+    public int insertBook(book b) {
+        String S = "The Following Book is inserted < ID : "+b.getId()+"  Name : "+b.getName()+"  Genre : "+b.getGenre() + ">";
+        L.info(S);
         Optional<book> B = BR.findByName(b.getName());
         if(B.isPresent())
             throw new BookIsAlreadyInStack();
         BR.save(b);
-        String S = "The Following Book is inserted < ID : "+b.getId()+"  Name : "+b.getName()+"  Genre : "+b.getGenre() + ">";
-        L.info(S);
+        return b.getId();
     }
 
-    public void deleteBook(int id) {
+    public int deleteBook(int id) {
         BR.deleteById(id);
         String S = "The Following Book is Deleted Successfully "+id;
         L.info(S);
+        return 1;
     }
 
     public void updateBook(int id, book b) {
