@@ -1,7 +1,7 @@
 package com.example.DemoH2.demoH2.bookService;
 
 
-import com.example.DemoH2.demoH2.entity.book;
+import com.example.DemoH2.demoH2.entity.Book;
 import com.example.DemoH2.demoH2.exceptions.BookIsAlreadyInStack;
 import com.example.DemoH2.demoH2.exceptions.BookNotFound;
 import com.example.DemoH2.demoH2.repository.bookRepository;
@@ -16,23 +16,23 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class bookService {
+public class BookService {
 
-    public static final Logger L = LoggerFactory.getLogger(bookService.class);
+    public static final Logger L = LoggerFactory.getLogger(BookService.class);
     @Autowired
     bookRepository BR;
     @Autowired
     JdbcTemplate jdbc;
 
     @SuppressWarnings("StreamToLoop")
-    public List<book> getAllBooks() {
-        return new ArrayList<book>(BR.findAll());
+    public List<Book> getAllBooks() {
+        return new ArrayList<Book>(BR.findAll());
     }
 
-    public book getBookById(int id) {
+    public Book getBookById(int id) {
         String S = "Returning Book for id " + id;
         L.info(S);
-        book B = BR.findById(id).get();
+        Book B = BR.findById(id).get();
         if(B.checkBook())
             throw new BookNotFound();
         return B;
@@ -43,10 +43,10 @@ public class bookService {
         return b;*/
     }
 
-    public int insertBook(book b) {
+    public int insertBook(Book b) {
         String S = "The Following Book is inserted < ID : "+b.getId()+"  Name : "+b.getName()+"  Genre : "+b.getGenre() + ">";
         L.info(S);
-        Optional<book> B = BR.findByName(b.getName());
+        Optional<Book> B = BR.findByName(b.getName());
         if(B.isPresent())
             throw new BookIsAlreadyInStack();
         BR.save(b);
@@ -60,7 +60,7 @@ public class bookService {
         return 1;
     }
 
-    public void updateBook(int id, book b) {
+    public void updateBook(int id, Book b) {
        /* book B = getBookById(id);
         B.setId(b.getId());
         B.setName(b.getName());

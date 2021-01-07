@@ -1,32 +1,31 @@
 package com.example.DemoH2.demoH2.controller;
 
-import com.example.DemoH2.demoH2.bookService.bookService;
-import com.example.DemoH2.demoH2.entity.book;
+import com.example.DemoH2.demoH2.bookService.BookService;
+import com.example.DemoH2.demoH2.entity.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 
 @RestController
-public class bookController {
+public class BookController {
 
     @Autowired
-    bookService BS;
+    BookService BS;
 
     @GetMapping("/book")
-    public List<book> getAllBooks() {
+    public List<Book> getAllBooks() {
         return BS.getAllBooks();
     }
 
     @GetMapping("/book/{id}")
-    public book getBookById(@PathVariable("id")int id){
+    public Book getBookById(@PathVariable("id")int id){
         return BS.getBookById(id);
     }
 
     @PostMapping("/book")
-    public int insertBook(@RequestBody book b) {
+    public int insertBook(@RequestBody Book b) {
         return BS.insertBook(b);
     }
 
@@ -36,7 +35,7 @@ public class bookController {
     }
 
     @PutMapping("/book/{id}")
-    public void updateBook(@PathVariable("id")int id, @RequestBody book b) {
+    public void updateBook(@PathVariable("id")int id, @RequestBody Book b) {
         BS.updateBook(id, b);
     }
 
