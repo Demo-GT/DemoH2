@@ -16,27 +16,27 @@ public class bookController {
     bookService BS;
 
     @GetMapping("/book")
-    private List<book> getAllBooks() {
+    public List<book> getAllBooks() {
         return BS.getAllBooks();
     }
 
     @GetMapping("/book/{id}")
-    private book getBookById(@PathVariable("id")int id){
+    public book getBookById(@PathVariable("id")int id){
         return BS.getBookById(id);
     }
 
     @PostMapping("/book")
-    private int insertBook(@RequestBody book b) {
+    public int insertBook(@RequestBody book b) {
         return BS.insertBook(b);
     }
 
     @DeleteMapping("/book/{id}")
-    private void deleteBook(@PathVariable("id")int id) {
-        BS.deleteBook(id);
+    public int deleteBook(@PathVariable("id")int id) {
+        return BS.deleteBook(id);
     }
 
     @PutMapping("/book/{id}")
-    private void updateBook(@PathVariable("id")int id, @RequestBody book b) {
+    public void updateBook(@PathVariable("id")int id, @RequestBody book b) {
         BS.updateBook(id, b);
     }
 
