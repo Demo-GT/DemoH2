@@ -1,18 +1,12 @@
 package com.example.DemoH2.demoH2.bookController;
 
-import com.example.DemoH2.demoH2.bookService.bookService;
-import com.example.DemoH2.demoH2.controller.bookController;
-import com.example.DemoH2.demoH2.entity.book;
-import org.junit.Before;
+import com.example.DemoH2.demoH2.bookService.BookService;
+import com.example.DemoH2.demoH2.controller.BookController;
+import com.example.DemoH2.demoH2.entity.Book;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -28,29 +22,28 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
 //@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-@WebMvcTest(bookController.class)
+@WebMvcTest(BookController.class)
 public class controllerTests {
 
     @Autowired
     MockMvc MMvc;
 
     @Autowired
-    bookController BC;
+    BookController BC;
 
     @MockBean
-    bookService BS;
+    BookService BS;
 
     @Test
     public void TestGETALL() throws Exception {
 
-        when(BS.getAllBooks()).thenReturn(new ArrayList<book>());
+        when(BS.getAllBooks()).thenReturn(new ArrayList<Book>());
 
-        List<book> L = BC.getAllBooks();
+        List<Book> L = BC.getAllBooks();
 
         assertEquals(0,L.size());
 
@@ -67,7 +60,7 @@ public class controllerTests {
     @Test
     public void TestGET() throws Exception {
 
-        when(BS.getBookById(anyInt())).thenReturn(new book());
+        when(BS.getBookById(anyInt())).thenReturn(new Book());
 
         RequestBuilder request = MockMvcRequestBuilders
                 .get("/book/1")
@@ -82,8 +75,8 @@ public class controllerTests {
     @Test
     public void TestPOST() throws Exception {
 
-        book b = new book("wei", "weu");
-        when(BS.insertBook(any(book.class))).thenReturn(0);
+        Book b = new Book("wei", "weu");
+        when(BS.insertBook(any(Book.class))).thenReturn(0);
 
         int result = BC.insertBook(b);
 
@@ -102,7 +95,7 @@ public class controllerTests {
     @Test
     public void TestDELETE() throws Exception {
 
-        book b = new book("wui", "whr");
+        Book b = new Book("wui", "whr");
 
         when(BS.deleteBook(anyInt())).thenReturn(1);
 

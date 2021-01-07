@@ -1,16 +1,14 @@
 package com.example.DemoH2.demoH2.bookService;
 
-import com.example.DemoH2.demoH2.entity.book;
+import com.example.DemoH2.demoH2.entity.Book;
 import com.example.DemoH2.demoH2.repository.bookRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.mockito.stubbing.OngoingStubbing;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -31,7 +29,7 @@ public class MockServiceTests<when> {
     bookRepository BR;
 
     @InjectMocks
-    bookService BS;
+    BookService BS;
 
     @Before
     public void setUp() {
@@ -43,9 +41,9 @@ public class MockServiceTests<when> {
 
         int result = 1;
 
-        when(BR.save(any(book.class))).thenReturn(new book("jhd", "bwj"));
+        when(BR.save(any(Book.class))).thenReturn(new Book("jhd", "bwj"));
 
-        int B = BS.insertBook(new book("ew","we"));
+        int B = BS.insertBook(new Book("ew","we"));
 
         assertEquals(0,B);
 
@@ -54,9 +52,9 @@ public class MockServiceTests<when> {
     @Test
     public void TestGet() {
 
-        when(BR.findAll()).thenReturn(new ArrayList<book>());
+        when(BR.findAll()).thenReturn(new ArrayList<Book>());
 
-        List<book> L = BS.getAllBooks();
+        List<Book> L = BS.getAllBooks();
 
         assertTrue(L.size()>=0);
 
@@ -65,11 +63,11 @@ public class MockServiceTests<when> {
     @Test
     public void TestGETByID() {
 
-        book b = new book(1,"we","w");
+        Book b = new Book(1,"we","w");
 
         when(BR.findById(anyInt())).thenReturn(Optional.of(b));
 
-        Optional<book> B = Optional.ofNullable(BS.getBookById(1));
+        Optional<Book> B = Optional.ofNullable(BS.getBookById(1));
 
         assertTrue((B.get()).getId()>0);
     }

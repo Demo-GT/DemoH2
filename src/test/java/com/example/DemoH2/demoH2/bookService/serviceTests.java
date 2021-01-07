@@ -1,7 +1,7 @@
 package com.example.DemoH2.demoH2.bookService;
 
 
-import com.example.DemoH2.demoH2.entity.book;
+import com.example.DemoH2.demoH2.entity.Book;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,27 +15,27 @@ import static org.junit.jupiter.api.Assertions.*;
 public class serviceTests {
 
     @Autowired
-    bookService Bs;
+    BookService Bs;
 
     @Test
     public void TestInsert() {
-        book B = new book("uegsf", "jaudgw");
+        Book B = new Book("uegsf", "jaudgw");
         Bs.insertBook(B);
-        book result = Bs.getBookById(2);
+        Book result = Bs.getBookById(2);
         assertEquals(B.getId(), result.getId());
     }
 
     @Test
     public void TestUpdate() {
-        book B = new book("qwert","564");
+        Book B = new Book("qwert","564");
         Bs.updateBook(2,B);
-        book result = Bs.getBookById(2);
+        Book result = Bs.getBookById(2);
         assertEquals(B.getGenre(),result.getGenre());
     }
     
     @Test
     public void TestDelete() {
-        Bs.insertBook(new book("uyq","qu"));
+        Bs.insertBook(new Book("uyq","qu"));
         assertTrue(Bs.deleteBook(1)==1);
     }
 
